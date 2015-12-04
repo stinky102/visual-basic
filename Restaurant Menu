@@ -1,0 +1,257 @@
+Dim tax, subtotal, total As Decimal
+
+    Dim taxRate As Decimal = 0.08
+    Dim pricehamburger As Decimal = 4.75
+    Dim pricecheese As Decimal = 0.25
+    Dim pricepickles As Decimal = 0.25
+    Dim pricetomatoes As Decimal = 0.25
+    Dim pricechickensandwich As Decimal = 3.5
+    Dim pricelettuce As Decimal = 0.25
+    Dim priceranch As Decimal = 0.25
+    Dim pricemayo As Decimal = 0.25
+    Dim pricecarneasada As Decimal = 3.0
+    Dim pricesalsa As Decimal = 0.25
+    Dim priceguacamole As Decimal = 0.25
+    Dim pricequeso As Decimal = 0.25
+    Dim pricefries As Decimal = 1.25
+    Dim pricechipswsalsa As Decimal = 1.5
+    Dim pricecaesarsalad As Decimal = 2.0
+    Dim pricesoda As Decimal = 1.25
+    Dim pricepinacolada As Decimal = 2.0
+    Dim priceicedtea As Decimal = 1.75
+
+    Private Sub Form1_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+
+        initializeVariables()
+        clearTheCustomerSelections()
+        clearReceipt()
+
+    End Sub
+
+    Private Sub initializeVariables() 'for each new customer
+
+        subTotal = 0
+        tax = 0
+        total = 0
+
+    End Sub
+
+
+    Private Sub clearTheCustomerSelections() 'for each new customer
+
+        btnHamburger.Checked = False
+        btnChickenSandwich.Checked = False
+        btnCarneAsada.Checked = False
+        btnFries.Checked = False
+        btnChipswSalsa.Checked = False
+        btnCaesarSalad.Checked = False
+        btnSoda.Checked = False
+        btnPinaColada.Checked = False
+        btnIcedtea.Checked = False
+        btnCheese.Checked = False
+        btnPickles.Checked = False
+        btnTomatoes.Checked = False
+        btnLettuce.Checked = False
+        btnRanch.Checked = False
+        btnMayo.Checked = False
+        btnSalsa.Checked = False
+        btnGuacamole.Checked = False
+        btnQueso.Checked = False
+
+
+
+
+    End Sub
+
+    Private Sub clearReceipt() 'for each new customer
+
+        listBoxDisplay.Items.Clear() 'clear the customer checked
+        listBoxTotal.Items.Clear()
+
+    End Sub
+
+
+    Private Sub btnAddToCart_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAddToCart.Click
+
+        computeCurrentSelection()
+        updateTotal()
+        clearTheCustomerSelections()
+
+
+    End Sub
+
+
+    Private Sub computeCurrentSelection()
+
+        'If Hamburger Item was selected
+        If btnHamburger.Checked Then
+            subTotal += priceHamburger 'subtotal = subtotal + priceHamburger
+
+            Dim hamburgerItem As String = priceHamburger.ToString("C") & " Hamburger"
+            listBoxDisplay.Items.Add(hamburgerItem)
+        End If
+
+        'Chicken Sandwich Item was selected
+        If btnChickenSandwich.Checked Then
+            subTotal += priceChickenSandwich
+
+            Dim chickenSandwichItem As String = priceChickenSandwich.ToString("C") & " Chicken Sandwich"
+            listBoxDisplay.Items.Add(chickenSandwichItem)
+        End If
+
+        'Carne Asada Item was selected
+        If btnCarneAsada.Checked Then
+            subTotal += pricecarneasada
+
+            Dim CarneAsadaItem As String = pricecarneasada.ToString("C") & " Carne Asada"
+            ListBoxDisplay.Items.Add(CarneAsadaItem)
+        End If
+
+        If btnfries.Checked Then
+            subTotal += pricefries
+
+            Dim FriesItem As String = pricefries.ToString("C") & " Fries"
+            ListBoxDisplay.Items.Add(FriesItem)
+        End If
+
+        If btnchipswsalsa.Checked Then
+            subTotal += pricechipswsalsa
+
+            Dim chipswsalsaItem As String = pricechipswsalsa.ToString("C") & " Chipswsalsa"
+            ListBoxDisplay.Items.Add(chipswsalsaItem)
+        End If
+
+        If btncaesarsalad.Checked Then
+            subTotal += pricecaesarsalad
+
+            Dim CaeasarSaladItem As String = pricecaesarsalad.ToString("C") & " Caesar Salad"
+            ListBoxDisplay.Items.Add(CaeasarSaladItem)
+        End If
+
+        If btnsoda.Checked Then
+            subTotal += pricesoda
+
+            Dim sodaItem As String = pricesoda.ToString("C") & " Soda"
+            ListBoxDisplay.Items.Add(sodaItem)
+        End If
+
+        If btnpinacolada.Checked Then
+            subTotal += pricepinacolada
+
+            Dim pinacoladaItem As String = pricepinacolada.ToString("C") & " pinacolada"
+            ListBoxDisplay.Items.Add(pinacoladaItem)
+        End If
+
+        If btnicedtea.Checked Then
+            subTotal += priceicedtea
+
+            Dim icedteaItem As String = priceicedtea.ToString("C") & " icedtea"
+            ListBoxDisplay.Items.Add(icedteaItem)
+        End If
+
+        If btnpickles.Checked Then
+            subTotal += pricepickles
+
+            Dim picklesItem As String = pricepickles.ToString("C") & " pickles"
+            ListBoxDisplay.Items.Add(picklesItem)
+        End If
+
+        If btntomatoes.Checked Then
+            subTotal += pricetomatoes
+
+            Dim tomatoesItem As String = pricetomatoes.ToString("C") & " tomatoes"
+            ListBoxDisplay.Items.Add(tomatoesItem)
+        End If
+
+        If btnlettuce.Checked Then
+            subTotal += pricelettuce
+
+            Dim lettuceItem As String = pricelettuce.ToString("C") & " lettuce"
+            ListBoxDisplay.Items.Add(lettuceItem)
+        End If
+
+        If btnranch.Checked Then
+            subTotal += priceranch
+
+            Dim ranchItem As String = priceranch.ToString("C") & " ranch"
+            ListBoxDisplay.Items.Add(ranchItem)
+        End If
+
+        If btnmayo.Checked Then
+            subTotal += pricemayo
+
+            Dim mayoItem As String = pricemayo.ToString("C") & " mayo"
+            ListBoxDisplay.Items.Add(mayoItem)
+        End If
+
+        If btnsalsa.Checked Then
+            subTotal += pricesalsa
+
+            Dim salsaItem As String = pricesalsa.ToString("C") & " salsa"
+            ListBoxDisplay.Items.Add(salsaItem)
+        End If
+
+        If btnguacamole.Checked Then
+            subTotal += priceguacamole
+
+            Dim guacamoleItem As String = priceguacamole.ToString("C") & " guacamole"
+            ListBoxDisplay.Items.Add(guacamoleItem)
+        End If
+
+        If btnqueso.Checked Then
+            subTotal += pricequeso
+
+            Dim quesoItem As String = pricequeso.ToString("C") & " queso"
+            ListBoxDisplay.Items.Add(quesoItem)
+        End If
+
+        'Adding Cheese Item was selected
+        If btncheese.Checked Then
+            subTotal += pricecheese
+
+            Dim extraCheeseItem As String = pricecheese.ToString("C") & " add Cheese"
+            ListBoxDisplay.Items.Add(extraCheeseItem)
+        End If
+
+    End Sub
+
+   
+
+
+    Private Sub computerCurrentSelections()
+
+        If btnHamburger.Checked Then
+            subTotal += pricehamburger
+
+            Dim hamburgerItem As String = pricehamburger.ToString("C") & " Hamburger"
+            ListBoxDisplay.Items.Add(hamburgerItem)
+        End If
+
+    End Sub
+
+    Private Sub updateTotal()
+
+        ListBoxTotal.Items.Clear()
+
+        ListBoxTotal.Items.Add("SUB TOTAL = " & subTotal.ToString("C"))
+
+        tax = subTotal * taxRate
+        ListBoxTotal.Items.Add("        TAX = " & tax.ToString("C"))
+
+        total = subTotal + tax
+        ListBoxTotal.Items.Add("        TOTAL = " & total.ToString("C"))
+
+        ListBoxDisplay.Items.Add("------------------")
+    End Sub
+
+    Private Sub btnclear_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnclear.Click
+        initializeVariables()
+        clearTheCustomerSelections()
+        clearReceipt()
+    End Sub
+
+    Private Sub btnpay_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnpay.Click
+        Me.Close()
+
+    End Sub
+End Class
