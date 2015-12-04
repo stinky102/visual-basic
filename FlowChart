@@ -1,0 +1,57 @@
+Dim Score As Integer
+
+    Private Sub initializeVariables()
+
+        Score = 0
+
+    End Sub
+
+    Private Sub ButtonEnter_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ButtonEnter.Click
+
+        If TextBoxAge.Text < 20 Then
+
+            Score = Score + 1
+
+        ElseIf TextBoxAge.Text > 19 And TextBoxAge.Text < 30 Then
+
+            Score = Score + 2
+
+        Else
+            Score = Score + 3
+        End If
+
+        If RadioButtonYesSmoker.Checked Then
+            Score = Score + 4
+        End If
+
+        If RadioButtonYesHBP.Checked Then
+            Score = Score + 2
+        End If
+
+        If RadioButtonYesHFD.Checked Then
+            Score = Score + 1
+        End If
+
+        LabelScore.Text = CStr(Score)
+
+
+    End Sub
+
+    Private Sub Form1_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+        initializeVariables()
+    End Sub
+
+    Private Sub ButtonReset_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ButtonReset.Click
+
+        LabelScore.Text = "Score"
+        TextBoxAge.Text = " "
+        Score = 0
+
+        RadioButtonYesSmoker.Checked = False
+        RadioButtonNoSmoker.Checked = False
+        RadioButtonYesHBP.Checked = False
+        RadioButtonNoHBP.Checked = False
+        RadioButtonYesHFD.Checked = False
+        RadioButtonNoHFD.Checked = False
+    End Sub
+End Class
