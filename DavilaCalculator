@@ -1,0 +1,245 @@
+ Dim num1, num2, answer, remember As Double
+    Dim operation, flagChecker As Integer
+
+    Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmdMC.Click
+
+        If txtDisplay.Text = 0 Or flagChecker = "0" Then
+            txtDisplay.Text = "MC"
+
+        Else
+            txtDisplay.Text = txtDisplay.Text + "MC"
+        End If
+
+    End Sub
+
+    Private Sub Button25_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button25.Click
+
+        If txtDisplay.Text = 0 Or flagChecker = "0" Then
+            txtDisplay.Text = "0"
+
+        Else
+            txtDisplay.Text = txtDisplay.Text + "0"
+        End If
+
+    End Sub
+
+    Private Sub Button20_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button20.Click
+
+        If txtDisplay.Text = 0 Or flagChecker = "0" Then
+            txtDisplay.Text = "1"
+
+        Else
+            txtDisplay.Text = txtDisplay.Text + "1"
+        End If
+
+    End Sub
+
+    Private Sub Button21_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button21.Click
+
+        If txtDisplay.Text = 0 Or flagChecker = "0" Then
+            txtDisplay.Text = "2"
+
+        Else
+            txtDisplay.Text = txtDisplay.Text + "2"
+        End If
+
+    End Sub
+
+    Private Sub Button22_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button22.Click
+
+        If txtDisplay.Text = 0 Or flagChecker = "0" Then
+            txtDisplay.Text = "3"
+
+        Else
+            txtDisplay.Text = txtDisplay.Text + "3"
+        End If
+
+    End Sub
+
+    Private Sub Button15_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button15.Click
+
+        If txtDisplay.Text = 0 Or flagChecker = "0" Then
+            txtDisplay.Text = "4"
+        Else
+            txtDisplay.Text = txtDisplay.Text + "4"
+        End If
+
+    End Sub
+
+    Private Sub Button16_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button16.Click
+
+        If txtDisplay.Text = 0 Or flagChecker = "0" Then
+            txtDisplay.Text = "5"
+        Else
+            txtDisplay.Text = txtDisplay.Text + "5"
+        End If
+    End Sub
+
+    Private Sub Button17_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button17.Click
+        If txtDisplay.Text = 0 Or flagChecker = "0" Then
+            txtDisplay.Text = "6"
+        Else
+            txtDisplay.Text = txtDisplay.Text + "6"
+        End If
+    End Sub
+
+    Private Sub Button10_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button10.Click
+        If txtDisplay.Text = 0 Or flagChecker = "0" Then
+            txtDisplay.Text = "7"
+        Else
+            txtDisplay.Text = txtDisplay.Text = "7"
+        End If
+    End Sub
+
+    Private Sub Button11_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button11.Click
+        If txtDisplay.Text = 0 Or flagChecker = "0" Then
+            txtDisplay.Text = "8"
+        Else
+            txtDisplay.Text = txtDisplay.Text = "8"
+        End If
+    End Sub
+
+    Private Sub Button12_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button12.Click
+        If txtDisplay.Text = 0 Or flagChecker = "0" Then
+            txtDisplay.Text = "9"
+        Else
+            txtDisplay.Text = txtDisplay.Text = "9"
+        End If
+    End Sub
+
+    Private Sub Button2_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button2.Click
+        If txtDisplay.Text = 0 Then
+            txtDisplay.Text = "MR"
+        Else
+            txtDisplay.Text = txtDisplay.Text = "MR"
+        End If
+    End Sub
+
+    Private Sub Button1_Click_1(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button1.Click
+        If txtDisplay.Text = 0 Then
+            txtDisplay.Text = "MS"
+        Else
+            txtDisplay.Text = txtDisplay.Text = "MS"
+        End If
+    End Sub
+
+    Private Sub Button3_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button3.Click
+        If txtDisplay.Text = 0 Then
+            txtDisplay.Text = "+M"
+        Else
+            txtDisplay.Text = txtDisplay.Text = "+M"
+        End If
+    End Sub
+
+    Private Sub Button4_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button4.Click
+        If txtDisplay.Text = 0 Then
+            txtDisplay.Text = "-M"
+        Else
+            txtDisplay.Text = txtDisplay.Text = "-M"
+        End If
+    End Sub
+
+    Private Sub Button5_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button5.Click
+        If txtDisplay.Text = 0 Then
+            txtDisplay.Text = "<--"
+        Else
+            txtDisplay.Text = txtDisplay.Text = "<--"
+        End If
+    End Sub
+
+    Private Sub Button6_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button6.Click
+        If txtDisplay.Text = 0 Then
+            txtDisplay.Text = "CE"
+        Else
+            txtDisplay.Text = txtDisplay.Text = "CE"
+        End If
+    End Sub
+
+    Private Sub Button7_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button7.Click
+        If txtDisplay.Text = 0 Then
+            txtDisplay.Text = "C"
+        Else
+            txtDisplay.Text = txtDisplay.Text = "C"
+        End If
+    End Sub
+
+    Private Sub Button8_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button8.Click
+        If txtDisplay.Text = 0 Then
+            txtDisplay.Text = "+/-"
+        Else
+            txtDisplay.Text = txtDisplay.Text = "+/-"
+        End If
+    End Sub
+
+    Private Sub Button9_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button9.Click
+        If txtDisplay.Text = 0 Then
+            txtDisplay.Text = "sq root"
+        Else
+            txtDisplay.Text = txtDisplay.Text = "sq root"
+        End If
+    End Sub
+
+    Private Sub Button14_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button14.Click
+        If txtDisplay.Text = 0 Then
+            txtDisplay.Text = "%"
+        Else
+            txtDisplay.Text = txtDisplay.Text = "%"
+        End If
+    End Sub
+
+    Private Sub Button19_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button19.Click
+        If txtDisplay.Text = 0 Then
+            txtDisplay.Text = "1/x"
+        Else
+            txtDisplay.Text = txtDisplay.Text = "1/x"
+        End If
+    End Sub
+
+    Private Sub Button24_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button24.Click
+        If txtDisplay.Text = 0 Then
+            txtDisplay.Text = "="
+        Else
+            txtDisplay.Text = txtDisplay.Text = "="
+        End If
+    End Sub
+
+    Private Sub Button27_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button27.Click
+        If txtDisplay.Text = 0 Then
+            txtDisplay.Text = "+"
+        Else
+            txtDisplay.Text = txtDisplay.Text = "+"
+        End If
+    End Sub
+
+    Private Sub Button23_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button23.Click
+        If txtDisplay.Text = 0 Then
+            txtDisplay.Text = "-"
+        Else
+            txtDisplay.Text = txtDisplay.Text = "-"
+        End If
+    End Sub
+
+    Private Sub Button18_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button18.Click
+        If txtDisplay.Text = 0 Then
+            txtDisplay.Text = "*"
+        Else
+            txtDisplay.Text = txtDisplay.Text = "*"
+        End If
+    End Sub
+
+    Private Sub Button13_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button13.Click
+        If txtDisplay.Text = 0 Then
+            txtDisplay.Text = "/"
+        Else
+            txtDisplay.Text = txtDisplay.Text = "/"
+        End If
+    End Sub
+
+    Private Sub Button26_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button26.Click
+        If txtDisplay.Text = 0 Or flagChecker = "0" Then
+            txtDisplay.Text = "."
+        Else
+            txtDisplay.Text = txtDisplay.Text = "."
+        End If
+    End Sub
+End Class
