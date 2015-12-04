@@ -1,0 +1,50 @@
+Dim userNumber As Integer
+    Dim numberCounter As Integer = 0
+
+
+    Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnEnter.Click
+
+        numberCounter = numberCounter + 1
+        labelNumberCount.Text = numberCounter
+        userNumber = Val(usrinput.Text)
+
+        If userNumber = 60 Then
+
+            labelResultWinner.Visible = True
+
+        ElseIf userNumber > 0 And userNumber < 60 Then
+
+            labelResultLoser.Text = "Dude, you are way to low."
+            labelResultLoser.Visible = True
+
+        ElseIf userNumber > 60 And userNumber < 101 Then
+
+            labelResultLoser.Text = "Your guess is too high, Try again"
+            labelResultLoser.Visible = True
+
+        Else
+            labelResultLoser.Text = "Your guess is out of the scope of the game."
+            labelResultLoser.Visible = True
+        End If
+
+    End Sub
+
+    Private Sub Button2_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnClear.Click
+
+        If userNumber = 60 Then
+            labelNumberCount.Text = 0
+            numberCounter = 0
+        End If
+
+
+        usrinput.Text = ""
+        labelResultWinner.Visible = False
+        labelResultLoser.Visible = False
+    End Sub
+
+    Private Sub Form1_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+        usrinput.Text = ""
+        labelResultWinner.Visible = False
+        labelResultLoser.Visible = False
+    End Sub
+End Class
