@@ -1,0 +1,79 @@
+
+    Private Sub BtnEnterToday_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BtnEnterToday.Click
+
+        Dim objAddItemForm As New frmAddItem
+
+        objAddItemForm.ShowDialog()
+        Do Until objAddItemForm.TxtItemDescription.Text = ""
+            Dim lviTodaysSales As New ListViewItem(objAddItemForm.TxtItemDescription.Text)
+
+            lviTodaysSales.SubItems.Add(Format$(objAddItemForm.nudTotalItemSales.Value, "Currency"))
+
+            If objAddItemForm.chkOnSale.Checked Then
+
+                lviTodaysSales.SubItems.Add("Yes")
+            Else
+                lviTodaysSales.SubItems.Add("No")
+            End If
+
+            lstTodaysSales.Items.Add(lviTodaysSales)
+            objAddItemForm.ShowDialog()
+
+        Loop
+    End Sub
+
+    Private Sub BtnTotalToday_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BtnTotalToday.Click
+
+        Dim intIndex, inListCount As Integer
+        Dim sngTotalSales As Single = 0
+        Dim sngTotalOnSale As Single = 0
+        Dim sngTotalRegularPrice As Single = 0
+        Dim sngItemSales As Single
+        Dim strResults As String, strItemSales As String
+
+        inListCount = Convert.ToInt32(lstTodaysSales.Items.Count)
+
+        For intIndex = 0 To inListCount - 1
+            strItemSales = lstTodaysSales.Items(intIndex).SubItems(1).Text
+            strItemSales = strItemSales.Replace("$", "0")
+            sngItemSales = Convert.ToString(strItemSales)
+
+            sngTotalSales += sngItemSales
+            If lstTodaysSales.Items(intIndex).SubItems(2).Text = "Yes" Then
+                sngTotalOnSale += sngItemSales
+            Else
+                sngTotalRegularPrice += sngItemSales
+
+            End If
+
+        Next
+
+        strResults = "Total sales today: " & Format$(sngTotalSales, "Currency") & ControlChars.NewLine
+        strResults &= "Total sales for items on sale:" & Format$(sngTotalOnSale, "Currency") & ControlChars.NewLine
+        strResults = "Total sales for items not on sale: " & Format$(sngTotalRegularPrice, "Currency") & ControlChars.NewLine
+        MessageBox.Show(strResults, "Daily Sales Totals")
+    End Sub
+
+    Private Sub btnClearToday_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnClearToday.Click
+        lstTodaysSales.Items.Clear()
+    End Sub
+
+    Private Sub lstTodaysSales_Key(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles lstTodaysSales.KeyDown
+
+        If e.KeyCode = Keys.Delete And lstTodaysSales.SelectedIndices.Count > 0 Then
+            lstTodaysSales.Items.RemoveAt(lstTodaysSales.SelectedIndices(0))
+        End If
+    End Sub
+
+
+    Private Sub frmTodaysSalesCheck_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+        Dim intColumn0Width As Integer
+
+        intColumn0Width = Me.Width - lstTodaysSales.Columns(1).Width - lstTodaysSales.Columns(2).Width - 12
+
+        If intColumn0Width > 0 Then
+            lstTodaysSales.Columns(0).Width = intColumn0Width
+        End If
+
+    End Sub
+End Class
