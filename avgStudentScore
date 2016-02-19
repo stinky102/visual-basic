@@ -1,0 +1,46 @@
+Private Sub btnDisplayData_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnDisplayData.Click
+        Dim counter As Integer
+        Dim strResults As String = ""
+        Dim sngScores As Single = 0
+        Dim sngAverage As Single = 0
+        Dim sngListCount As Single = 0
+
+        sngListCount = Convert.ToSingle(lstStudentScore.Items.Count)
+
+        For counter = 0 To sngListCount - 1
+
+            sngScores = Convert.ToSingle(lstStudentScore.Items(counter).SubItems(1).Text.Replace("%", ""))
+            sngAverage += sngScores
+
+        Next
+
+        sngAverage = sngAverage / sngListCount
+
+        strResults = "The average score is: " & Format(sngAverage, "0.00") & "&" & ControlChars.NewLine
+        strResults &= "The number of scores: " & sngListCount
+        MessageBox.Show(strResults, "Average Score")
+    End Sub
+
+    Private Sub btnClear_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnClear.Click
+        Me.Close()
+    End Sub
+
+    Private Sub btnStudentData_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnStudentData.Click
+
+        Dim studentForm As New frmStudentInfo
+
+        studentForm.ShowDialog()
+
+        Do Until studentForm.txtStudentName.Text = ""
+            Dim studentData As New ListViewItem(studentForm.txtStudentName.Text)
+
+            studentData.SubItems.Add(studentForm.txtTestScore.Text & "%")
+
+            If Not studentForm.txtStudentName.Text = "" Then
+                lstStudentScore.Items.Add(studentData)
+            End If
+            studentForm.ShowDialog()
+        Loop
+
+    End Sub
+End Class
