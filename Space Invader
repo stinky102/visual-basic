@@ -1,0 +1,511 @@
+#Region "Variables"
+
+    Dim ControlLeft As Boolean
+    Dim ControlRight As Boolean
+    Dim Fire As Boolean
+    Dim Fire1 As Boolean
+    Dim Fire2 As Boolean
+    Dim Fire3 As Boolean
+    Dim Fire4 As Boolean
+    Dim Fire5 As Boolean
+
+    Dim SpaceInvader(11) As PictureBox
+    Dim Locations(11) As System.Drawing.Point
+    Dim InvaderShot(11) As Boolean
+    Dim InvaderShotLabel(11) As Label
+
+    Dim MoveSpaceInvader As Integer = 5
+    Dim MoveShip As Integer = 20
+    Dim ShotSpeed As Integer = 20
+    Dim WhichInvader As Integer
+    Dim Complete As Integer
+    Dim Level As Integer = 1
+    Dim Score As Integer
+    Dim Ran As Integer
+
+
+
+#End Region
+
+#Region "Buttons"
+
+    Private Sub BtnStart_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnStart.Click
+        LblSpaceinvaders.Hide()
+        BtnStart.Hide()
+        BtnQuit.Hide()
+        PicDrone.Hide()
+        PicShip.Hide()
+        GamePanel.Show()
+        MoveComp.Enabled = True
+        MoveComp.Start()
+
+    End Sub
+
+    Private Sub BtnQuit_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnQuit.Click
+
+        Me.Close()
+
+    End Sub
+
+#End Region
+
+#Region "timers"
+
+    Private Sub moveComp_Tick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MoveComp.Tick
+        If controlLeft = True Then
+            spaceShip.Left = spaceShip.Left - moveShip
+            resetShot.Left = resetShot.Left - moveShip
+
+            If fire1 = False Then
+                shot1.Left = shot1.Left - moveShip
+            End If
+
+            If fire2 = False Then
+                shot2.Left = shot2.Left - moveShip
+            End If
+
+            If fire3 = False Then
+                shot3.Left = shot3.Left - moveShip
+            End If
+
+            If fire4 = False Then
+                shot4.Left = shot4.Left - moveShip
+            End If
+
+            If fire5 = False Then
+                shot5.Left = shot5.Left - moveShip
+            End If
+
+            If spaceShip.Left < 0 Then 'new code
+                spaceShip.Left = spaceShip.Left + moveShip
+                resetShot.Left = resetShot.Left + moveShip
+                If fire1 = False Then
+                    shot1.Left = shot1.Left + moveShip
+                End If
+
+                If fire2 = False Then
+                    shot2.Left = shot2.Left + moveShip
+                End If
+
+                If fire3 = False Then
+                    shot3.Left = shot3.Left + moveShip
+                End If
+
+                If fire4 = False Then
+                    shot4.Left = shot4.Left + moveShip
+                End If
+
+                If fire5 = False Then
+                    shot5.Left = shot5.Left + moveShip
+                End If
+
+            End If
+        End If
+
+        If controlRight = True Then
+            spaceShip.Left = spaceShip.Left + moveShip
+            resetShot.Left = resetShot.Left + moveShip
+
+            If fire1 = False Then
+                shot1.Left = shot1.Left + moveShip
+            End If
+
+            If fire2 = False Then
+                shot2.Left = shot2.Left + moveShip
+            End If
+
+            If fire3 = False Then
+                shot3.Left = shot3.Left + moveShip
+            End If
+
+            If fire4 = False Then
+                shot4.Left = shot4.Left + moveShip
+            End If
+
+            If fire5 = False Then
+                shot5.Left = shot5.Left + moveShip
+            End If
+
+            If spaceShip.Left > Me.Width - spaceShip.Width Then 'new code
+                spaceShip.Left = spaceShip.Left - moveShip
+                resetShot.Left = resetShot.Left - moveShip
+
+                If fire1 = False Then
+                    shot1.Left = shot1.Left - moveShip
+                End If
+
+                If fire2 = False Then
+                    shot2.Left = shot2.Left - moveShip
+                End If
+
+                If fire3 = False Then
+                    shot3.Left = shot3.Left - moveShip
+                End If
+
+                If fire4 = False Then
+                    shot4.Left = shot4.Left - moveShip
+                End If
+
+                If fire5 = False Then
+                    shot5.Left = shot5.Left - moveShip
+                End If
+            End If
+        End If
+
+
+        moveInvader()
+        If fire = True Then
+            checkShot()
+        End If
+        moveShot()
+        moveInvaderShots()
+    End Sub
+    Private Sub Timer1_Tick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Timer1.Tick
+        Timer1.Stop()
+        sbPanel.Show()
+    End Sub
+#End Region
+
+#Region "KeyPresses"
+
+    Private Sub MoveCompStop(ByVal Sender As System.Object, ByVal E As System.Windows.Forms.KeyEventArgs) Handles MyBase.KeyUp
+        If E.KeyValue = Keys.Left Then
+            ControlLeft = False
+        End If
+        If E.KeyValue = Keys.Right Then
+            ControlRight = False
+        End If
+        If E.KeyValue = Keys.A Then
+            Fire = False
+        End If
+    End Sub
+
+    Private Sub MoveCompLeft(ByVal Sender As System.Object, ByVal E As System.Windows.Forms.KeyEventArgs) Handles MyBase.KeyDown
+        If E.KeyValue = Keys.Left Then
+            ControlLeft = True
+        End If
+        If E.KeyValue = Keys.Right Then
+            ControlRight = True
+        End If
+        If E.KeyValue = Keys.A Then
+            Fire = True
+        End If
+    End Sub
+#End Region
+
+#Region "MySubs"
+
+    Private Sub MoveInvaderShots()
+        Dim I As Integer
+
+        For I = 0 To 11
+            Ran = CInt(Int((1000 * Rnd()) + 1))
+            If Ran = 1000 Then
+                InvaderShot(I) = True
+                InvaderShotLabel(I).Show()
+                If SpaceInvader(I).Top > 1000 Then
+                    InvaderShot(I) = False
+                    InvaderShotLabel(I).Hide()
+                End If
+            End If
+        Next
+        For I = 0 To 11
+            If InvaderShot(I) = True Then
+                InvaderShotLabel(I).Top = InvaderShotLabel(I).Top + 20
+                If InvaderShotLabel(I).Bounds.IntersectsWith(Spaceship.Bounds) Then
+                    PlayerDead()
+                End If
+                If InvaderShotLabel(I).Top > Me.Height Then
+                    InvaderShot(I) = False
+                    InvaderShotLabel(I).Hide()
+                    InvaderShotLabel(I).Location = SpaceInvader(I).Location
+                    InvaderShotLabel(I).Top = InvaderShotLabel(I).Top + 32
+                    InvaderShotLabel(I).Left = InvaderShotLabel(I).Left + 32
+                End If
+
+            End If
+        Next
+
+    End Sub
+
+    Private Sub CreateInvaderShotArray()
+
+        InvaderShotLabel(0) = InvaderShot1
+        InvaderShotLabel(1) = InvaderShot2
+        InvaderShotLabel(2) = InvaderShot3
+        InvaderShotLabel(3) = InvaderShot4
+        InvaderShotLabel(4) = InvaderShot5
+        InvaderShotLabel(5) = InvaderShot6
+        InvaderShotLabel(6) = InvaderShot7
+        InvaderShotLabel(7) = InvaderShot8
+        InvaderShotLabel(8) = InvaderShot9
+        InvaderShotLabel(9) = InvaderShot10
+        InvaderShotLabel(10) = InvaderShot11
+        InvaderShotLabel(11) = InvaderShot12
+
+    End Sub
+
+    Private Sub CreateInvaderArray()
+
+        Dim I As Integer
+
+        SpaceInvader(0) = Invader1
+        SpaceInvader(1) = Invader2
+        SpaceInvader(2) = Invader3
+        SpaceInvader(3) = Invader4
+        SpaceInvader(4) = Invader5
+        SpaceInvader(5) = Invader6
+        SpaceInvader(6) = Invader7
+        SpaceInvader(7) = Invader8
+        SpaceInvader(8) = Invader9
+        SpaceInvader(9) = Invader10
+        SpaceInvader(10) = Invader11
+        SpaceInvader(11) = Invader12
+        For I = 0 To 11
+            Locations(I) = SpaceInvader(I).Location
+        Next
+    End Sub
+
+    Private Sub MoveInvader()
+
+        Dim I As Integer
+        For I = 0 To 11
+            SpaceInvader(I).Left = SpaceInvader(I).Left + MoveSpaceInvader
+            If InvaderShot(I) = False Then
+                InvaderShotLabel(I).Left = InvaderShotLabel(I).Left + MoveSpaceInvader
+            End If
+            If SpaceInvader(I).Bounds.IntersectsWith(Spaceship.Bounds) Then
+                PlayerDead()
+            End If
+        Next
+
+        If Invader6.Left > Me.Width - Invader6.Width Then
+            MoveSpaceInvader = MoveSpaceInvader * -1
+            For I = 0 To 11
+                SpaceInvader(I).Top = SpaceInvader(I).Top + 25
+                If InvaderShot(I) = False Then
+                    InvaderShotLabel(I).Top = InvaderShotLabel(I).Top + 25
+                End If
+            Next
+        End If
+
+        If Invader1.Left < 0 Then
+            MoveSpaceInvader = MoveSpaceInvader * -1
+            For I = 0 To 11
+                SpaceInvader(I).Top = SpaceInvader(I).Top + 25
+                If InvaderShot(I) = False Then
+                    InvaderShotLabel(I).Top = InvaderShotLabel(I).Top + 25
+                End If
+            Next
+        End If
+
+    End Sub
+
+    Private Sub CheckShot()
+        Fire = False
+        If Fire1 = False Then
+            Fire1 = True
+            Shot1.Show()
+            Exit Sub
+        End If
+        If Fire2 = False Then
+            Fire2 = True
+            Shot2.Show()
+            Exit Sub
+        End If
+        If Fire3 = False Then
+            Fire3 = True
+            Shot3.Show()
+            Exit Sub
+        End If
+        If Fire4 = False Then
+            Fire4 = True
+            Shot4.Show()
+            Exit Sub
+        End If
+        If Fire5 = False Then
+            Fire5 = True
+            Shot5.Show()
+            Exit Sub
+        End If
+    End Sub
+
+    Private Sub MoveShot()
+
+        Dim I As Integer
+
+        If Fire1 = True Then
+            Shot1.Top = Shot1.Top - ShotSpeed
+            For I = 0 To 11
+                If Shot1.Bounds.IntersectsWith(SpaceInvader(I).Bounds) Then
+                    WhichInvader = I
+                    Shot1Hit()
+                End If
+            Next
+            If Shot1.Top < 0 Then
+                Shot1.Hide()
+                Fire1 = False
+                Shot1.Location = ResetShot.Location
+            End If
+        End If
+
+        If Fire2 = True Then
+            Shot2.Top = Shot2.Top - ShotSpeed
+            For I = 0 To 11
+                If Shot2.Bounds.IntersectsWith(SpaceInvader(I).Bounds) Then
+                    WhichInvader = I
+                    Shot2Hit()
+                End If
+            Next
+            If Shot2.Top < 0 Then
+                Shot2.Hide()
+                Fire2 = False
+                Shot2.Location = ResetShot.Location
+            End If
+        End If
+
+        If Fire3 = True Then
+            Shot3.Top = Shot3.Top - ShotSpeed
+            For I = 0 To 11
+                If Shot3.Bounds.IntersectsWith(SpaceInvader(I).Bounds) Then
+                    WhichInvader = I
+                    Shot3Hit()
+                End If
+            Next
+            If Shot3.Top < 0 Then
+                Shot3.Hide()
+                Fire3 = False
+                Shot3.Location = ResetShot.Location
+            End If
+        End If
+
+        If Fire4 = True Then
+            Shot4.Top = Shot4.Top - ShotSpeed
+            For I = 0 To 11
+                If Shot4.Bounds.IntersectsWith(SpaceInvader(I).Bounds) Then
+                    WhichInvader = I
+                    Shot4Hit()
+                End If
+            Next
+            If Shot4.Top < 0 Then
+                Shot4.Hide()
+                Fire4 = False
+                Shot4.Location = ResetShot.Location
+            End If
+        End If
+
+        If Fire5 = True Then
+            Shot5.Top = Shot5.Top - ShotSpeed
+            For I = 0 To 11
+                If Shot5.Bounds.IntersectsWith(SpaceInvader(I).Bounds) Then
+                    WhichInvader = I
+                    Shot5Hit()
+                End If
+            Next
+            If Shot5.Top < 0 Then
+                Shot5.Hide()
+                Fire5 = False
+                Shot5.Location = ResetShot.Location
+            End If
+        End If
+
+    End Sub
+
+    Private Sub Shot1Hit()
+        Fire1 = False
+        Shot1.Hide()
+        Shot1.Location = ResetShot.Location
+        SpaceInvader(WhichInvader).Top = SpaceInvader(WhichInvader).Top + 10000
+        Complete += 1
+        If Complete = 12 Then
+            LevelComplete()
+        End If
+        Score = Score + 1
+        LblScore.Text = "Score: " & Score
+    End Sub
+
+    Private Sub Shot2Hit()
+        Fire2 = False
+        Shot2.Hide()
+        Shot2.Location = ResetShot.Location
+        SpaceInvader(WhichInvader).Top = SpaceInvader(WhichInvader).Top + 10000
+        Complete += 1
+        If Complete = 12 Then
+            LevelComplete()
+        End If
+        Score = Score + 1
+        LblScore.Text = "Score: " & Score
+    End Sub
+
+    Private Sub Shot3Hit()
+        Fire3 = False
+        Shot3.Hide()
+        Shot3.Location = ResetShot.Location
+        SpaceInvader(WhichInvader).Top = SpaceInvader(WhichInvader).Top + 10000
+        Complete += 1
+        If Complete = 12 Then
+            LevelComplete()
+        End If
+        Score = Score + 1
+        LblScore.Text = "Score: " & Score
+
+    End Sub
+
+    Private Sub Shot4Hit()
+        Fire4 = False
+        Shot4.Hide()
+        Shot4.Location = ResetShot.Location
+        SpaceInvader(WhichInvader).Top = SpaceInvader(WhichInvader).Top + 10000
+        Complete += 1
+        If Complete = 12 Then
+            LevelComplete()
+        End If
+        Score = Score + 1
+        LblScore.Text = "Score: " & Score
+    End Sub
+
+    Private Sub Shot5Hit()
+        Fire5 = False
+        Shot5.Hide()
+        Shot5.Location = ResetShot.Location
+        SpaceInvader(WhichInvader).Top = SpaceInvader(WhichInvader).Top + 10000
+        Complete += 1
+        If Complete = 12 Then
+            LevelComplete()
+        End If
+        Score = Score + 1
+        LblScore.Text = "Score: " & Score
+    End Sub
+
+    Private Sub PlayerDead()
+
+        MoveComp.Stop()
+        Spaceship.Image = Image.FromFile("Fire Ball.png")
+        MessageBox.Show()
+    End Sub
+
+    Private Sub LevelComplete()
+
+        Dim I As Integer
+        Level = Level + 1
+        LblLevel.Text = "LEVEL" & Level
+
+        For I = 0 To 11
+            SpaceInvader(I).Location = Locations(I)
+        Next
+        Complete = 0
+        If Level > 3 Then
+            MoveSpaceInvader = 15
+        End If
+        If Level > 6 Then
+            MoveSpaceInvader = 20
+        End If
+        If Level > 9 Then
+            MoveSpaceInvader = 25
+        End If
+        If Level > 12 Then
+            MoveSpaceInvader = 30
+        End If
+    End Sub
+#End Region
+End Class
